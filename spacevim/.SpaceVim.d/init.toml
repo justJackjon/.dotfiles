@@ -1,0 +1,43 @@
+[[custom_plugins]]
+# BEGIN: ANSIBLE MANAGED CUSTOM PLUGINS
+repo = 'github/copilot.vim'
+merged = false
+
+[[custom_plugins]]
+repo = 'dracula/vim'
+merged = false
+
+[[custom_plugins]]
+repo = 'pearofducks/ansible-vim'
+merged = false
+# END: ANSIBLE MANAGED CUSTOM PLUGINS
+[[custom_plugins]]
+name = "aliou/bats.vim"
+merged = false
+
+[options]
+# BEGIN: ANSIBLE MANAGED OPTIONS
+colorscheme = 'dracula'
+colorscheme_bg = 'dark'
+# NOTE: Disable guicolors in basic mode, many terminals do not support 24bit true colors.
+enable_guicolors = false
+statusline_separator = 'arrow'
+statusline_iseparator = 'arrow'
+buffer_index_type = 0
+enable_tabline_filetype_icon = true
+enable_statusline_mode = true
+bootstrap_after = 'myspacevim#after'
+
+[[layers]]
+name = 'autocomplete'
+auto-completion-return-key-behavior = 'complete'
+auto-completion-tab-key-behavior = 'cycle'
+
+[[layers]]
+name = 'shell'
+default_position = 'top'
+default_height = 50
+
+[[layers]]
+name = 'telescope'
+# END: ANSIBLE MANAGED OPTIONS
