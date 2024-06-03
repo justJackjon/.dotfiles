@@ -27,7 +27,9 @@ source ~/.vimrc
 " General Settings
 " ===============================
 
-let &shell = '"C:\WINDOWS\system32\cmd.exe"'
+if !has('unix') && !has('mac')
+  let &shell = '"C:\WINDOWS\system32\cmd.exe"'
+endif
 
 set clipboard+=ideaput
 
@@ -46,23 +48,14 @@ let g:WhichKey_FontSize = 14
 " IdeaVim Specific Mappings
 " ===============================
 
-" Edit IdeaVim configuration
+" Edit IdeaVim Configuration
 map <leader>ve :e ~/.ideavimrc<CR>
 
-" Reload IdeaVim configuration
+" Reload IdeaVim Configuration
 map <leader>vs :source ~/.ideavimrc<CR>
 
-" Don't use Ex mode, use Q for formatting
+" Don't use Ex Mode, use Q for Formatting
 map Q gq
-
-" Split Resize
-nnoremap <C-Up> <Action>(StretchSplitToTop)
-nnoremap <C-Down> <Action>(StretchSplitToBottom)
-nnoremap <C-Left> <Action>(StretchSplitToLeft)
-nnoremap <C-Right> <Action>(StretchSplitToRight)
-
-" New File
-nnoremap <leader>fn <Action>(NewFile)
 
 
 " ===============================
@@ -70,38 +63,38 @@ nnoremap <leader>fn <Action>(NewFile)
 " REF: https://jb.gg/abva4t
 " ===============================
 
-" Rename
-map <leader>cr <Action>(RenameElement)
-
-" Go to definition
+" Go to Definition
 map gd <Action>(GotoDeclaration)
 
-" Go to references
+" Go to References
 map gr <Action>(ShowUsages)
 
-" Go to implementation
+" Go to Implementation
 map gI <Action>(GotoImplementation)
 
-" Go to type definition
-nmap <leader>gy <Action>(GotoTypeDeclaration)
-
-" Go to type definition
+" Go to Type Definition
 map gy <Action>(GotoTypeDeclaration)
 
 " Hover
 map K <Action>(QuickImplementations)
 
-" Signature help
+" Signature Help
 map gK <Action>(ParameterInfo)
 
-" Code action
+" Code Action
 map <leader>ca <Action>(ShowIntentionActions)
 
-" Next reference
+" Rename
+map <leader>cr <Action>(RenameElement)
+
+" Format
+map <leader>cf <Action>(ReformatCode)
+
+" Next Reference
 map ]] <Action>(MethodDown)
 map <a-n> <Action>(MethodDown)
 
-" Previous reference
+" Previous Reference
 map [[ <Action>(MethodUp)
 map <a-p> <Action>(MethodUp)
 
@@ -111,39 +104,89 @@ map <a-p> <Action>(MethodUp)
 " REF: https://jb.gg/abva4t
 " ===============================
 
-" Bufferline.nvim mappings
+" Toggle View Modes
+map <C-z> <Action>(ToggleZenMode)
+
+" Show Menus
+nmap <leader>mm <Action>(MainMenu)
+nmap <leader>ma <Action>(AnalyzeMenu)
+nmap <leader>mb <Action>(BuildMenu)
+nmap <leader>mc <Action>(CodeMenu)
+nmap <leader>mf <Action>(FindMenuGroup)
+nmap <leader>mg <Action>(GoToMenu)
+nmap <leader>ms <Action>(ScopeViewPopupMenu)
+nmap <leader>mt <Action>(EditorTabPopupMenu)
+nmap <leader>mw <Action>(ToolWindowsGroup)
+
+" General Navigation
+nmap <C-i> <Action>(Back)
+nmap <C-o> <Action>(Forward)
+nmap <leader>1 <Action>(GoToTab1)
+nmap <leader>2 <Action>(GoToTab2)
+nmap <leader>3 <Action>(GoToTab3)
+nmap <leader>4 <Action>(GoToTab4)
+nmap <leader>5 <Action>(GoToTab5)
+nmap <leader>6 <Action>(GoToTab6)
+nmap <leader>7 <Action>(GoToTab7)
+nmap <leader>8 <Action>(GoToTab8)
+nmap <leader>9 <Action>(GoToTab9)
+
+" Terminal
+map <leader>ft <Action>(ActivateTerminalToolWindow)
+map <leader>fT <Action>(Terminal.OpenInTerminal)
+map <C-/> <Action>(ActivateTerminalToolWindow)
+
+" Window Management
+map <leader>wd <Action>(HideActiveWindow)
+map <leader>wD <Action>(HideAllWindows)
+map <C-Esc> <Action>(HideAllWindows)
+map <leader>ww <Action>(JumpToLastWindow)
+map <leader>wm <Action>(WindowMenu)
+map <leader>w- <Action>(SplitHorizontally)
+map <leader>w| <Action>(SplitVertically)
+map <leader>- <Action>(SplitHorizontally)
+map <leader>| <Action>(SplitVertically)
+
+" Split Resize
+map <C-Up> <Action>(StretchSplitToTop)
+map <C-Down> <Action>(StretchSplitToBottom)
+map <C-Left> <Action>(StretchSplitToLeft)
+map <C-Right> <Action>(StretchSplitToRight)
+
+" New File
+map <leader>fn <Action>(NewFile)
+
+" Tab Management
+map <leader><tab>d <Action>(CloseEditor)
+map <leader>bd <Action>(CloseEditor)
+map <leader>bD <Action>(CloseAllEditors)
+
+" Bufferline.nvim
 map <leader>bl <Action>(CloseEditor)
 map <leader>bo <Action>(CloseAllEditorsButActive)
 map <leader>bp <Action>(PinActiveTab)
 map <leader>bP <Action>(CloseAllUnpinnedEditors)
 map <leader>br <Action>(CloseEditor)
-map [b <Action>(GotoPreviousTab)
-map ]b <Action>(GotoNextTab)
+map [b <Action>(PreviousTab)
+map ]b <Action>(NextTab)
 map <S-h> <Action>(PreviousTab)
 map <S-l> <Action>(NextTab)
 
-" Flash.nvim mappings
-map <c-s> <Action>(FindInPath)
-map r <Action>(FindUsages)
-map R <Action>(FindUsages)
-map s <Action>(SearchEverywhere)
-map S <Action>(SearchEverywhere)
-
-" Mason.nvim mappings
+" Mason.nvim
 map <leader>cm <Action>(ShowSettings)
 
-" Neo-tree.nvim mappings
+" Neo-tree.nvim
 map <leader>be <Action>(Switcher)
 map <leader>e <Action>(ActivateProjectToolWindow)
 map <leader>E <Action>(ActivateProjectToolWindow)
 map <leader>fe <Action>(ActivateProjectToolWindow)
 map <leader>fE <Action>(ActivateProjectToolWindow)
-map <leader>ge <Action>(ActivateProjectToolWindow)
+map <leader>ge <Action>(CheckinProject)
 
-" Nvim-spectre mappings
+" Nvim-spectre
 map <leader>sr <Action>(ReplaceInPath)
 
-" Telescope.nvim mappings
+" Telescope.nvim
 map <leader><space> <Action>(SearchEverywhere)
 map <leader>, <Action>(SwitchRecentFiles)
 map <leader>/ <Action>(SearchEverywhere)
@@ -157,7 +200,7 @@ map <leader>fr <Action>(RecentFiles)
 map <leader>fR <Action>(RecentFiles)
 map <leader>gc <Action>(VcsShowTabbedFileHistory)
 map <leader>gs <Action>(Vcs.ShowChangesToolWindow)
-map <leader>s" <Action>(SelectInProjectView)
+map <leader>s\" <Action>(SelectInProjectView)
 map <leader>sa <Action>(SelectInProjectView)
 map <leader>sb <Action>(SelectInProjectView)
 map <leader>sc <Action>(SelectInProjectView)
@@ -166,9 +209,9 @@ map <leader>sd <Action>(FindInPath)
 map <leader>sD <Action>(FindInPath)
 map <leader>sg <Action>(FindInPath)
 map <leader>sG <Action>(FindInPath)
-map <leader>sh <Action>(ShowSettings)
+map <leader>sh <Action>(HelpTopics)
 map <leader>sj <Action>(JumpToLastWindow)
-map <leader>sk <Action>(ShowIntentionActions)
+map <leader>sk <Action>(GotoAction)
 map <leader>sl <Action>(RecentLocations)
 map <leader>sm <Action>(FindInPath)
 map <leader>so <Action>(FindInPath)
@@ -181,17 +224,27 @@ map <leader>sw <Action>(FindInPath)
 map <leader>sW <Action>(FindInPath)
 map <leader>uC <Action>(ShowSettings)
 
-" Trouble.nvim mappings
-map <leader>cs <Action>(SelectInProjectView)
-map <leader>cS <Action>(SelectInProjectView)
-map <leader>xL <Action>(ShowSettings)
-map <leader>xQ <Action>(ShowSettings)
-map <leader>xx <Action>(ShowSettings)
-map <leader>xX <Action>(ShowSettings)
+" Todo-comments.nvim
+map <leader>st <Action>(ActivateTODOToolWindow)
+map <leader>sT <Action>(ActivateTODOToolWindow)
+map <leader>xt <Action>(ActivateTODOToolWindow)
+map <leader>xT <Action>(ActivateTODOToolWindow)
+map [t <Action>(Tree-selectPrevious)
+map ]t <Action>(Tree-selectNext)
+
+" Trouble.nvim
+map <leader>cs <Action>(ActivateProblemsViewToolWindow)
+map <leader>cS <Action>(ActivateProblemsViewToolWindow)
+map <leader>xL <Action>(ActivateProblemsViewToolWindow)
+map <leader>xQ <Action>(ActivateProblemsViewToolWindow)
+map <leader>xx <Action>(ActivateProblemsViewToolWindow)
+map <leader>xX <Action>(ActivateProblemsViewToolWindow)
 map [q <Action>(GotoPreviousError)
 map ]q <Action>(GotoNextError)
+map [e <Action>(GotoPreviousError)
+map ]e <Action>(GotoNextError)
 
-" Nvim-dap mappings
+" Nvim-dap
 map <leader>da <Action>(Debug)
 map <leader>db <Action>(ToggleLineBreakpoint)
 map <leader>dB <Action>(ToggleBreakpointEnabled)
@@ -210,71 +263,70 @@ map <leader>ds <Action>(ShowUsages)
 map <leader>dt <Action>(Stop)
 map <leader>dw <Action>(ShowSettings)
 
-" Nvim-dap-ui mappings
+" Nvim-dap-ui
 map <leader>de <Action>(ShowQuickDoc)
 map <leader>du <Action>(ShowUsages)
 
-" Aerial.nvim mappings
+" Aerial.nvim
 map <leader>cs <Action>(FileStructurePopup)
 
-" Dial.nvim mappings
+" Dial.nvim
 map <C-a> <Action>(EditorIncreaseFontSize)
 map <C-x> <Action>(EditorDecreaseFontSize)
 
-" Harpoon mappings
-map <leader>1 <Action>(GotoNextTab)
-map <leader>2 <Action>(GotoNextTab)
-map <leader>3 <Action>(GotoNextTab)
-map <leader>4 <Action>(GotoNextTab)
-map <leader>5 <Action>(GotoNextTab)
-map <leader>h <Action>(FileStructurePopup)
-map <leader>H <Action>(FileStructurePopup)
+" Harpoon
+map <leader>h <Action>(ActivateBookmarksToolWindow)
+map <leader>H <Action>(ToggleBookmark)
 
-" Mini.files mappings
+" Mini.files
 map <leader>fm <Action>(SelectInProjectView)
 map <leader>fM <Action>(SelectInProjectView)
 
-" Outline.nvim mappings
+" Outline.nvim
 map <leader>cs <Action>(FileStructurePopup)
 
-" Refactoring.nvim mappings
-map <leader>rb <Action>(ShowIntentionActions)
-map <leader>rc <Action>(ShowIntentionActions)
+" Refactoring.nvim
+map <leader>rb <Action>(RiderBackendAction-ExtractClass)
+map <leader>rc <Action>(Refactorings.QuickListPopupAction)
 map <leader>rf <Action>(ExtractMethod)
-map <leader>rF <Action>(ShowIntentionActions)
-map <leader>ri <Action>(IntroduceVariable)
-map <leader>rp <Action>(ShowIntentionActions)
-map <leader>rP <Action>(ShowIntentionActions)
+map <leader>rF <Action>(ExtractMethod)
+map <leader>ri <Action>(ExtractInterface)
+map <leader>rp <Action>(Refactorings.QuickListPopupAction)
+map <leader>rP <Action>(Refactorings.QuickListPopupAction)
 map <leader>rs <Action>(Refactorings.QuickListPopupAction)
 map <leader>rx <Action>(IntroduceVariable)
 
-" Venv-selector.nvim mappings
+" Venv-selector.nvim
 map <leader>cv <Action>(ShowSettings)
 
-" Nvim-metals mappings
-map <leader>mc <Action>(CompileProject)
-map <leader>me <Action>(ShowSettings)
+" Neotest
+map <leader>tl <Action>(RiderUnitTestRepeatPreviousRunAction)
+map <leader>tf <Action>(RiderUnitTestSessionRerunFailedTestsAction)
+map <leader>to <Action>(RiderUnitTestFocusExplorerAction)
+map <leader>tO <Action>(RiderUnitTestFocusExplorerAction)
+map <leader>tr <Action>(GotoTest)
+map <leader>ts <Action>(RiderUnitTestFocusExplorerAction)
+map <leader>tS <Action>(RiderUnitTestSessionAbortAction)
+map <leader>tt <Action>(RiderUnitTestRunContextAction)
+map <leader>tT <Action>(RiderUnitTestRunSolutionAction)
 
-" Neotest mappings
-map <leader>tl <Action>(RerunTests)
-map <leader>to <Action>(ShowQuickDoc)
-map <leader>tO <Action>(ShowSettings)
-map <leader>tr <Action>(RerunTests)
-map <leader>ts <Action>(ShowSettings)
-map <leader>tS <Action>(Stop)
-map <leader>tt <Action>(RerunTests)
-map <leader>tT <Action>(RerunTests)
-
-" Edgy.nvim mappings
+" Edgy.nvim
 map <leader>ue <Action>(ShowSettings)
 map <leader>uE <Action>(ShowSettings)
 
-" Nvim-treesitter-context mappings
+" Nvim-treesitter-context
 map <leader>ut <Action>(ShowSettings)
 
-" Mason.nvim mappings
+" Mason.nvim
 map <leader>gg <Action>(ShowSettings)
 map <leader>gG <Action>(ShowSettings)
 
-" Project.nvim mappings
+" Project.nvim
 map <leader>fp <Action>(SelectInProjectView)
+
+" GitHub Copilot
+map <leader>aa <Action>(copilot.chat.show)
+map <leader>ao <Action>(copilot.openCopilot)
+
+" Package Management
+map <leader>ps <Action>(RiderNuGetManagePackagesForCurrentProjectAction)
