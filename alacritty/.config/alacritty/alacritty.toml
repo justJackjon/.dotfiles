@@ -1,0 +1,29 @@
+import = [
+  "~/.config/alacritty/themes/themes/dracula.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+# NOTE:: The `Buttonless` option allows for a minimal UI, but native macOS tabs are not compatible with a
+#        buttonless window. Furthermore, the alacritty maintainers have made it very clear they will never 
+#        (ever, ever, ever) support tabs. So... until we can be bothered to learn tmux, we're going to have
+#        to keep this disabled.
+#
+#        Keybindings:
+#         - New Tab: ⌘  + t
+#         - Close Tab: ⌘  + w
+#         - Tab Right: ⌘  + ⇧  + ]
+#         - Tab Left: ⌘  + ⇧  + [
+#
+#   REF: macOS tabs - https://support.apple.com/en-gb/guide/mac-help/mchla4695cce/mac
+#
+# decorations = "Buttonless"
+startup_mode = "Maximized"
+option_as_alt = "Both"
+
+[font]
+normal.family = "CaskaydiaCove Nerd Font"
+normal.style = "Regular"
+size = 14
