@@ -8,15 +8,6 @@
 
 
 " ===============================
-" Enable IdeaVim Plugins
-" REF: https://jb.gg/ideavim-plugins
-" ===============================
-
-Plug 'machakann/vim-highlightedyank'
-Plug 'tpope/vim-commentary'
-
-
-" ===============================
 " Source Existing Vim Config
 " ===============================
 
@@ -35,18 +26,40 @@ set clipboard+=ideaput
 
 
 " ===============================
-" Which-Key Settings
+" Enable IdeaVim Plugins
+" REF: https://jb.gg/ideavim-plugins
 " ===============================
 
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-commentary'
+Plug 'machakann/vim-highlightedyank'
+Plug 'vim-scripts/ReplaceWithRegister'
+
 set which-key
+
+
+" ===============================
+" ReplaceWithRegister Remaps
+" ===============================
+
+nmap <Leader>pr  <Plug>ReplaceWithRegisterOperator
+nmap <Leader>prr <Plug>ReplaceWithRegisterLine
+xmap <Leader>pr  <Plug>ReplaceWithRegisterVisual
+
+
+" ===============================
+" Which-Key Settings
+" ===============================
 
 let g:WhichKey_FontFamily = 'Cascadia Code'
 let g:WhichKey_FontSize = 14
 
 
 " ===============================
-" IdeaVim Specific Mappings
-" ===============================
+" IdeaVim Specific Remaps
+" ==============================
 
 " Edit IdeaVim Configuration
 map <leader>ve :e ~/.ideavimrc<CR>
@@ -59,7 +72,7 @@ map Q gq
 
 
 " ===============================
-" LSP Key Mappings
+" LSP Remaps
 " REF: https://jb.gg/abva4t
 " ===============================
 
@@ -70,7 +83,7 @@ map gd <Action>(GotoDeclaration)
 map gr <Action>(ShowUsages)
 
 " Go to Implementation
-map gI <Action>(GotoImplementation)
+map gI <Action>(ReSharperGotoImplementation)
 
 " Go to Type Definition
 map gy <Action>(GotoTypeDeclaration)
@@ -169,8 +182,8 @@ map <leader>bP <Action>(CloseAllUnpinnedEditors)
 map <leader>br <Action>(CloseEditor)
 map [b <Action>(PreviousTab)
 map ]b <Action>(NextTab)
-map <S-h> <Action>(PreviousTab)
-map <S-l> <Action>(NextTab)
+map <A-h> <Action>(PreviousTab)
+map <A-l> <Action>(NextTab)
 
 " Mason.nvim
 map <leader>cm <Action>(ShowSettings)
