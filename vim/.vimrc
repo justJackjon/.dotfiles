@@ -39,10 +39,10 @@ let g:is_bash=1
 " ===============================
 
 " Better HJKL
-nmap H ^
-nmap L $
-nmap J }
-nmap K {
+nnoremap H ^
+nnoremap L $
+nnoremap J <C-d>
+nnoremap K <C-u>
 
 " Remap Join Line (Due to Better HJKL)
 nnoremap <Leader>cj J
