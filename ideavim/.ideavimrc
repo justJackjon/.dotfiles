@@ -76,11 +76,12 @@ map Q gq
 " REF: https://jb.gg/abva4t
 " ===============================
 
-" Go to Definition
-map gd <Action>(GotoDeclaration)
-
 " Go to References
 map gr <Action>(ShowUsages)
+
+" Go to Declaration
+map gd <Action>(GotoDeclaration)
+map gD <Action>(GotoDeclaration)
 
 " Go to Implementation
 map gI <Action>(ReSharperGotoImplementation)
@@ -88,17 +89,26 @@ map gI <Action>(ReSharperGotoImplementation)
 " Go to Type Definition
 map gy <Action>(GotoTypeDeclaration)
 
-" Hover
-map K <Action>(QuickImplementations)
+" Quick Definition
+map gk <Action>(QuickImplementations)
+map <C-k> <Action>(QuickImplementations)
 
-" Signature Help
-map gK <Action>(ParameterInfo)
+" Quick Documentation
+map gK <Action>(ShowHoverInfo)
 
 " Code Action
 map <leader>ca <Action>(ShowIntentionActions)
+map <leader>cA <Action>(ShowIntentionActions)
 
-" Rename
+" Code Vision (Codelens)
+map <leader>cc <Action>(CodeVision.ShowMore)
+map <leader>cC <Action>(CodeVision.ShowMore)
+
+" Rename Element
 map <leader>cr <Action>(RenameElement)
+
+" Rename File
+map <leader>cR <Action>(RenameFile)
 
 " Format
 map <leader>cf <Action>(ReformatCode)
@@ -143,6 +153,9 @@ nmap <leader>6 <Action>(GoToTab6)
 nmap <leader>7 <Action>(GoToTab7)
 nmap <leader>8 <Action>(GoToTab8)
 nmap <leader>9 <Action>(GoToTab9)
+
+" UI Management
+nmap <leader>ul <Action>(EditorToggleShowLineNumbers)
 
 " Terminal
 map <leader>ft <Action>(ActivateTerminalToolWindow)
