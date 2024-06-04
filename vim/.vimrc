@@ -38,8 +38,14 @@ let g:is_bash=1
 " General Key Mappings
 " ===============================
 
-" Replace selected text with yanked text, retaining the yanked text.
-vnoremap <leader>p "_dP
+" Better HJKL
+nmap H ^
+nmap L $
+nmap J }
+nmap K {
+
+" Remap Join Line (Due to Better HJKL)
+nnoremap <Leader>cj J
 
 " Down
 nnoremap j <Down>
@@ -74,8 +80,8 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Buffer Navigation
-nnoremap <S-h> :bprevious<CR>
-nnoremap <S-l> :bnext<CR>
+nnoremap <A-h> :bprevious<CR>
+nnoremap <A-l> :bnext<CR>
 nnoremap [b :bprevious<CR>
 nnoremap ]b :bnext<CR>
 
