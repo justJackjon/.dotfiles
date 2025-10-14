@@ -23,6 +23,13 @@ TERM = "xterm-256color"
 startup_mode = "Maximized"
 option_as_alt = "Both"
 
+[keyboard]
+
+[[keyboard.bindings]]
+key = "3"
+mods = "Option"
+chars = "#"
+
 [font]
 normal.family = "CaskaydiaCove Nerd Font"
 normal.style = "Regular"

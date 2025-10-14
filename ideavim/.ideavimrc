@@ -36,6 +36,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-commentary'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'justinmk/vim-sneak'
 
 set which-key
 

@@ -19,23 +19,23 @@ return {
     local opts = {
       theme = "doom",
       hide = {
-        -- NOTE: This is taken care of by lualine
-        --       Enabling this messes up the actual laststatus setting after loading a file
+        -- this is taken care of by lualine
+        -- enabling this messes up the actual laststatus setting after loading a file
         statusline = false,
       },
       config = {
         header = vim.split(logo, "\n"),
         -- stylua: ignore
         center = {
-          { action = LazyVim.telescope("files"),                                 desc = " Find File",       icon = " ", key = "f" },
-          { action = "ene | startinsert",                                        desc = " New File",        icon = " ", key = "n" },
-          { action = "Telescope oldfiles",                                       desc = " Recent Files",    icon = " ", key = "r" },
-          { action = "Telescope live_grep",                                      desc = " Find Text",       icon = " ", key = "g" },
-          { action = [[lua LazyVim.telescope.config_files()()]], desc = " Config",          icon = " ", key = "c" },
-          { action = 'lua require("persistence").load()',                        desc = " Restore Session", icon = " ", key = "s" },
-          { action = "LazyExtras",                                               desc = " Lazy Extras",     icon = " ", key = "x" },
-          { action = "Lazy",                                                     desc = " Lazy",            icon = "󰒲 ", key = "l" },
-          { action = "qa",                                                       desc = " Quit",            icon = " ", key = "q" },
+          { action = 'lua LazyVim.pick()()',                           desc = " Find File",       icon = " ", key = "f" },
+          { action = "ene | startinsert",                              desc = " New File",        icon = " ", key = "n" },
+          { action = 'lua LazyVim.pick("oldfiles")()',                 desc = " Recent Files",    icon = " ", key = "r" },
+          { action = 'lua LazyVim.pick("live_grep")()',                desc = " Find Text",       icon = " ", key = "g" },
+          { action = 'lua LazyVim.pick.config_files()()',              desc = " Config",          icon = " ", key = "c" },
+          { action = 'lua require("persistence").load()',              desc = " Restore Session", icon = " ", key = "s" },
+          { action = "LazyExtras",                                     desc = " Lazy Extras",     icon = " ", key = "x" },
+          { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
+          { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
         },
         footer = function()
           local stats = require("lazy").stats()
@@ -50,7 +50,7 @@ return {
       button.key_format = "  %s"
     end
 
-    -- NOTE: Close Lazy and re-open when the dashboard is ready
+    -- close Lazy and re-open when the dashboard is ready
     if vim.o.filetype == "lazy" then
       vim.cmd.close()
       vim.api.nvim_create_autocmd("User", {

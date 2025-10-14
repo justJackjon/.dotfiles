@@ -43,6 +43,7 @@ nnoremap H ^
 nnoremap L $
 nnoremap J <C-d>
 nnoremap K <C-u>
+inoremap jk <Esc>
 
 " Remap Join Line (Due to Better HJKL)
 nnoremap <Leader>cj J
