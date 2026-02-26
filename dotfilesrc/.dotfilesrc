@@ -8,12 +8,16 @@ alias commit="gitmoji -c"
 alias cm="commit"
 
 # AI CLI Commands:
-alias ask="llm -m fast -t cli-response"
-alias chat="llm chat -m code"
+function copilot() {
+  pnpm dlx @github/copilot "$@"
+}
 
 function gemini() {
   pnpm dlx @google/gemini-cli "$@"
 }
 
+alias cop='copilot'
 alias gem='gemini'
 alias jules="pnpm dlx @google/jules"
+alias ask="llm -m fast -t cli-response"
+alias chat="llm chat -m code"
