@@ -6,6 +6,7 @@ export FUNCTIONS_CORE_TOOLS_TELEMETRY_OPTOUT=1
 alias reload="source ~/.dotfilesrc && echo 'Reloaded run commands' || echo 'Failed'"
 alias commit="pnpm dlx gitmoji-cli -c"
 alias cm="commit"
+alias nx="pnpm dlx nx"
 
 # AI CLI Commands:
 function copilot() {
