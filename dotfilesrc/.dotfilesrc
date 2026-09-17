@@ -7,6 +7,11 @@ alias reload="source ~/.dotfilesrc && echo 'Reloaded run commands' || echo 'Fail
 alias commit="pnpm dlx gitmoji-cli -c"
 alias cm="commit"
 alias nx="pnpm dlx nx"
+alias conf="confluence"
+
+function confluence() {
+  pnpm dlx confluence-cli "$@"
+}
 
 # AI CLI Commands:
 function copilot() {
