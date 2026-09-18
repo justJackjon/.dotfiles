@@ -8,7 +8,21 @@ alias gitmoji-cli="pnpm dlx gitmoji-cli"
 alias commit="pnpm dlx gitmoji-cli -c"
 alias cm="commit"
 alias nx="pnpm dlx nx"
-alias dcon="pnpm dlx @devcontainers/cli"
+# NOTE: The devcontainer CLI exits silently with a non-zero status when Docker is unavailable,
+#       because its `exec` handler suppresses any error that carries an exit code (missing
+#       `docker` binary, unreachable daemon, etc.). Check Docker explicitly so the failure is
+#       loud instead of looking like the command did nothing.
+function dcon() {
+  if ! command -v docker >/dev/null 2>&1; then
+    echo "dcon: 'docker' not found on PATH. Install Docker (Engine on Linux/WSL2, Docker Desktop on macOS) and try again." >&2
+    return 1
+  fi
+  if ! docker info >/dev/null 2>&1; then
+    echo "dcon: Docker is installed but the daemon is not reachable. Start Docker (e.g. 'sudo systemctl start docker', or launch Docker Desktop) and try again." >&2
+    return 1
+  fi
+  pnpm dlx @devcontainers/cli "$@"
+}
 alias conf="confluence"
 
 function confluence() {
