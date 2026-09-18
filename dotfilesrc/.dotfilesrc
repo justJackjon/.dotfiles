@@ -18,7 +18,11 @@ function dcon() {
     return 1
   fi
   if ! docker info >/dev/null 2>&1; then
-    echo "dcon: Docker is installed but the daemon is not reachable. Start Docker (e.g. 'sudo systemctl start docker', or launch Docker Desktop) and try again." >&2
+    if ! id -nG 2>/dev/null | tr ' ' '\n' | grep -qx docker; then
+      echo 'dcon: cannot reach the Docker daemon - this session has no docker group (socket permission denied). Run "su - $USER" or restart WSL ("wsl --shutdown"), then retry.' >&2
+    else
+      echo "dcon: Docker is installed but the daemon is not reachable. Start Docker (e.g. 'sudo systemctl start docker', or launch Docker Desktop) and try again." >&2
+    fi
     return 1
   fi
   pnpm dlx @devcontainers/cli "$@"
