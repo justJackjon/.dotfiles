@@ -32,8 +32,12 @@ normal.style = "Regular"
 size = 14
 
 [general]
+# NOTE: The second import holds machine-specific settings written by
+#       https://github.com/justJackjon/local-machine-config (e.g. Mac-style key bindings in WSL's XFCE
+#       session). Alacritty skips missing imports, so machines without it are unaffected.
 import = [
-  "~/.config/alacritty/themes/themes/dracula.toml"
+  "~/.config/alacritty/themes/themes/dracula.toml",
+  "~/.config/local-machine-config/alacritty.toml"
 ]
 
 [[keyboard.bindings]]
